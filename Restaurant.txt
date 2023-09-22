@@ -1,0 +1,20 @@
+use Restaurant
+
+db.createCollection("FoodItem")
+db.createCollection("Customer")
+db.createCollection("Employee")
+
+db.FoodItem.insertMany([{"Dish_name":"Fried Rice","Dish_type":"Chinese","Dish_taste":"Spicy","Dish_qty":"Full/Half","Dish_price":190},{"Dish_name":"Schzwan Rice","Dish_type":"Chinese","Dish_taste":"Spicy","Dish_qty":"Full","Dish_price":200},{"Dish_name":"Corn Soup","Dish_type":"Starter","Dish_taste":"Sweet","Dish_qty":"Full","Dish_price":150},{"Dish_name":"Tomato Soup","Dish_type":"Starter","Dish_taste":"Sweet & Sour","Dish_qty":"Full","Dish_price": 160},{"Dish_name":"Bum Biryani","Dish_type":"Biryani","Dish_taste":"Spicy","Dish_qty":"Full","Dish_price":350},{"Dish_name":"Chicken Kolhapuri","Dish_type":"Curry","Dish_taste":"Super Spicy","Dish_qty":"Full","Dish_price": 220},{"Dish_name":"Chicken Handi","Dish_type":"Curry","Dish_taste":"Spicy","Dish_qty":"Full","Dish_price":260},{"Dish_name":"Triple Rice","Dish_type":"Chinese","Dish_taste":"Spicy","Dish_qty":"Full/Half","Dish_price":220},{"Dish_name":"Chicken Lollipop","Dish_type":"Starter","Dish_taste":"Awesome","Dish_qty":"6/12 pcs","Dish_price": 280},{"Dish_name":"Vadapav","Dish_type":"Fast Food","Dish_taste":"Swarg Dikh Jayega","Dish_qty":"XL","Dish_price":100000}])
+db.Customer.insert([{"Name":"Bhavesh","Email":"sahyog@11.com","Age":30,"Gender":"M"},{"Name":"Vijay","Email":"sahyog@12.com","Age":20,"Gender":"M"},{"Name":"Sandeep","Email":"sahyog@13.com","Age":21,"Gender":"M"},{"Name":"Arun","Email":"sahyog@14.com","Age":19,"Gender":"M"},{"Name":"Balasaheb","Email":"sahyog@15.com","Age":18,"Gender":"M"},{"Name":"Ritesh","Email":"sahyog@16.com","Age":19,"Gender":"F"},{"Name":"Darshan","Email":"sahyog@17.com","Age":20,"Gender":"F"},{"Name":"Soorvesh","Email":"sahyog@18.com","Age":20,"Gender":"M"},{"Name":"Bhagela","Email":"sahyog@19.com","Age":23,"Gender":"F"},{"Name":"Priyesh","Email":"sahyog@20.com","Age":24,"Gender":"M"}])
+db.Employee.insert([{"Name":"Random0","Email":"Random0@gmail.com","Age":23,"Phone_no":2847228472,"Address":"Borivli"},{"Name":"Random1","Email":"Random1@gmail.com","Age":32,"Phone_no":2174837382,"Address":"Andheri"},{"Name":"Random2","Email":"Random2@gmail.com","Age":13,"Phone_no":2984739859,"Address":"Ghatkopar"},{"Name":"Random3","Email":"Random3@gmail.com","Age":34,"Phone_no":2848388287,"Address":"Bhandup"},{"Name":"Random4","Email":"Random4@gmail.com","Age":45,"Phone_no":6475482772,"Address":"Mulund"},{"Name":"Random5","Email":"Random5@gmail.com","Age":52,"Phone_no":5738483759,"Address":"Diva"},{"Name":"Random6","Email":"Random6@gmail.com","Age":43,"Phone_no":2847630589,"Address":"Kalyan"},{"Name":"Random7","Email":"Random7@gmail.com","Age":32,"Phone_no":1938383848,"Address":"Mumbai"},{"Name":"Random8","Email":"Random8@gmail.com","Age":34,"Phone_no":8836463557,"Address":"Dombivli"},{"Name":"Random9","Email":"Random9@gmail.com","Age":23,"Phone_no":1234567890,"Address":"Thane"}])
+
+db.Fooditem.find().pretty()
+db.Customer.find().pretty()
+db.Employee.find().pretty()
+
+db.FoodItem.find({},{Dish_name:1,Dish_type:1}).pretty()
+db.FoodItem.find({},{_id:0,Dish_name:1,Dish_type:1,Dish_qty:1}).pretty()
+
+db.FoodItem.delete({Dish_type:{$eq:"Chinese"}})
+
+db.Customer.update({Age:30},{$set:{Gender:"F"}})

@@ -1,0 +1,28 @@
+1.create folder "Data"
+2.create 3 sub folders within "Data" : rs1,rs2,rs3
+3.open cmd in C:\Program Files\MongoDB\Server\4.4\bin
+4."utube" = server name
+	start mongod -replSet utube -logpath F:\NGT\Replica\Data\rs1\1.log --dbpath F:\NGT\Replica\Data\rs1 --port 27018
+	start mongod -replSet utube -logpath F:\NGT\Replica\Data\rs2\2.log --dbpath F:\NGT\Replica\Data\rs2 --port 27019
+	start mongod -replSet utube -logpath F:\NGT\Replica\Data\rs3\3.log --dbpath F:\NGT\Replica\Data\rs3 --port 27020
+
+///Primary=================================================
+5.again open cmd in C:\Program Files\MongoDB\Server\4.4\bin
+	mongo --port 27018
+6.Configure Server
+	config={_id:"utube",members:[{_id:0,host:"localhost:27018"},{_id:1,host:"localhost:27019"},{_id:2,host:"localhost:27020"}]}
+7.	rs.initiate(config)
+8.	rs.status()
+9.shift to primary
+10.create database and collection and insert docs
+	use test123
+	db.createCollection("cust")
+	db.cust.insert({"name":"hardik"})
+
+///secondary===============================================
+11.open cmd in C:\Program Files\MongoDB\Server\4.4\bin
+	mongo --port 27019
+12."show dbs" not work in 27019 cmd
+13."rs.slaveOk()" -->even this wont work so run
+	rs.secondaryOk()
+15.access all secondary but can't write/modify

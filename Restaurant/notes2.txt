@@ -1,0 +1,89 @@
+mongoimport --file C:\Users\SCMS\Desktop\Restaurant\restaurants.json --db Office --collection Restaurants --drop
+//=========================================================================
+{
+        "_id" : ObjectId("64c74477f3cb0db48ff46e4e"),
+        "address" : {
+                "building" : "6914",
+                "coord" : [
+                        -73.89565,
+                        40.746155
+                ],
+                "street" : "Roosevelt Avenue",
+                "zipcode" : "11377"
+        },
+        "borough" : "Queens",
+        "cuisine" : "Filipino",
+        "grades" : [
+                {
+                        "date" : ISODate("2015-01-12T00:00:00Z"),
+                        "grade" : "A",
+                        "score" : 8
+                },
+                {
+                        "date" : ISODate("2014-06-11T00:00:00Z"),
+                        "grade" : "A",
+                        "score" : 13
+                },
+                {
+                        "date" : ISODate("2013-05-23T00:00:00Z"),
+                        "grade" : "A",
+                        "score" : 3
+                },
+                {
+                        "date" : ISODate("2012-05-14T00:00:00Z"),
+                        "grade" : "A",
+                        "score" : 3
+                }
+        ],
+        "name" : "Renee'S Kitchenette",
+        "restaurant_id" : "40515124"
+}
+
+A.=========================================================================
+
+db.Restaurants.find().pretty()
+db.Restaurants.find({},{restaurant_id:1,name:1,borough:1,cuisine:1})
+db.Restaurants.find({},{restaurant_id:1,name:1,borough:1,cuisine:1,_id:0})
+db.Restaurants.find({},{restaurant_id:1,name:1,borough:1,zipcode:1,_id:0})
+db.Restaurants.find({borough:'Bronx'})
+
+B.=========================================================================
+
+db.Restaurants.find({name:/mon/},{_id:0,name:1,borough:1,"address.coord":1,cuisine:1})
+db.Restaurants.find({name:{$regex: '^Mad'}},{_id: 0,name:1,borough:1,"address.coord":1,cuisine:1})
+db.Restaurants.find({"address.coord":{$lt:-95.754168}})
+db.Restaurants.find({name:{$regex: '^Wil'}},{restaurant_id: 1,name:1,borough:1,cuisine:1})
+db.Restaurants.find({name:{$regex: 'ces$'}},{restaurant_id: 1,name:1,borough:1,cuisine:1})
+
+C.=========================================================================
+
+db.Restaurants.find({$and:[{cuisine:{$ne:'American'}},{'grades.score':{$gt:70}},{'address.coord':{ $lt:-65.754168}}]})
+db.Restaurants.find({$and:[{cuisine:{$ne:'American'}},{'grades.score':{$gt:70}},{'address.coord':{ $lt:-65.754168}}]})
+db.Restaurants.find({$and:[{cuisine:{$ne:'American'}},{'grades.grade':'A'},{borough:'Brooklyn'}]}).sort({cuisine:-1})
+db.Restaurants.find({name:{$regex: '^Wil'}},{restaurant_id: 1,name:1,borough:1,cuisine:1})
+db.Restaurants.find({name:{$regex: 'ces$'}},{restaurant_id: 1,name:1,borough:1,cuisine:1})
+
+D.=========================================================================
+
+db.Restaurants.find({name:{$regex:/Reg/}},{restaurant_id:1,name:1,borough:1,cuisine:1})
+db.Restaurants.find({borough:'Bronx',$or:[{cuisine:'American'},{cuisine:'Chinese'}]})
+db.Restaurants.find({$or:[{borough:'Staten Island'},{borough:'Queens'},{borough:'Bronx'},{borough:'Brooklyn'}]},{restaurant_id:1,name:1,borough:1,cuisine:1})
+db.Restaurants.find({$nor:[{borough:'Staten Island'},{borough:'Queens'},{borough:'Bronx'},{borough:'Brooklyn'}]},{restaurant_id:1,name:1,borough:1,cuisine:1})
+db.Restaurants.find({'grades.score':{$gt:10}},{restaurant_id:1,name:1,borough:1,cuisine:1})
+
+E.=========================================================================
+
+db.Restaurants.find({$or:[{$not:{$and:[{cuisine:'American'},{cuisine:'Chinese'}]}},{name:'^Wil'}]},{restaurant_id:1,name:1,borough:1,cuisine:1})
+
+
+db.Restaurants.find({$and:[{"address.coord.1":{$gt:42}},{"address.coord.1":{$lt:52}}]},{restaurant_id:1,name:1,address:1})
+db.Restaurants.find().sort({name:-1})
+
+
+F.===========================================================================
+
+db.Restaurants.find({},{name:1,_id:0}).sort({name:-1})
+db.Restaurants.find({},{cuisine:1,borough:1,_id:0}).sort({cuisine:1,borough:-1})
+db.Restaurants.find({'address.street':{$esist:true}}).pretty()
+
+

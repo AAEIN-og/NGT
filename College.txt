@@ -1,0 +1,28 @@
+use College
+
+db.createCollection("Teacher")
+db.createCollection("Student")
+db.createCollection("Course")
+
+db.Teacher.insert([{"_id": 1,"name":"Sarika","age":18},{"_id": 2,"name":"Pradnya","age":25},{"_id": 3,"name":"Ahmed","age":30},{"_id": 4,"name":"Arya","age":35},{"_id": 5,"name":"Deepa","age":40}])
+db.Student.insert([{"_id":1,"name":"Vijay","class":"BSC IT"},{"_id":2,"name":"Arun","class":"HM"},{"_id":3,"name":"Balasaheb","class":"CS"},{"_id":4,"name":"Sandyp","class":"BCA"},{"_id":5,"name":"Ganpat","class":"B COM"}])
+db.Course.insert([{"Subject_name":"Vada Pav","Subject_code":"subcode_1","Class":"HM"},{"Subject_name":"MERN Developer guid","Subject_code":"subcode_2","Class":"MCA"},{"Subject_name":"JAVA","Subject_code":"subcode_3","Class":"BCA"},{"Subject_name":"Full Stack","Subject_code":"subcode_4","Class":"MCA"},{"Subject_name":"NGT","Subject_code":"subcode_5","Class":"IT"}])
+
+db.Teacher.find({},{_id:0,name:1,age:1})
+
+db.Student.updateMany({class:"BCA"},{$set:{name:"Sandeep"}})
+
+db.Course.deleteOne({"Subject_name":"NGT"})
+
+db.Teacher.find({age:{$gt:30}})
+
+db.Course.find({Class:"MCA"},{_id:0,Subject_name:1})
+
+db.Course.find().sort({class:1})
+
+db.Student.find().limit(3)
+
+db.Teacher.find()[4]
+
+db.Course.find({$and:[{"Class":"BCA"},{"Subject_name":"JAVA"}]})
+

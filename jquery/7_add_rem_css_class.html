@@ -1,0 +1,74 @@
+<!-- 7. Write a jQuery to add and remove CSS classes from the HTML elements. -->
+
+<!-- ========================================   Add Class   ======================================= -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Adding a Class to the Elements in jQuery</title>
+<style>
+    .page-header{
+        color: red;
+        text-transform: uppercase;
+    }
+    .highlight{
+        background: yellow;
+    }
+	.hint{
+        font-style: italic;
+    }        
+</style>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        $("h1").addClass("page-header");
+        $("p.hint").addClass("highlight");
+    });
+});
+</script>
+</head>
+<body>
+    <h1>Demo Text</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+    <p class="hint"><strong>Tip:</strong> Lorem Ipsum is dummy text.</p>
+    <button type="button">Add Class</button>
+</body>
+</html>
+
+<!-- ========================================   Remove Class   ======================================= -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Removing Classes from the Elements in jQuery</title>
+<style>
+    .page-header{
+        color: red;
+        text-transform: uppercase;
+    }
+    .highlight{
+        background: yellow;
+    }
+	.hint{
+        font-style: italic;
+    } 
+</style>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        $("h1").removeClass("page-header");
+        $("p").removeClass("hint highlight");
+    });
+});
+</script>
+</head>
+<body>
+    <h1 class="page-header">Demo Text</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+    <p class="hint highlight"><strong>Tip:</strong> Lorem Ipsum is dummy text.</p>
+    <button type="button">Remove Class</button>
+</body>
+</html>
