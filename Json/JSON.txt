@@ -1,0 +1,68 @@
+(A) Create a JSON file and parse it.
+
+Ans :
+
+a.json 
+
+ {
+   "employee": [
+      {
+         "id": "01",
+         "name": "Amit",
+         "department": "Sales"
+      },
+      {
+         "id": "04",
+         "name": "sunil",
+         "department": "HR"
+      }
+   ]
+}
+
+----------------------------------------------------------------------
+a.py
+
+import json
+
+# Opening JSON file
+f = open('a.json',)
+
+# returns JSON object as
+# a dictionary
+data = json.load(f)
+
+# Iterating through the json
+# list
+for i in data['employee']:
+	print(i)
+
+# Closing file
+f.close()
+
+
+=======================================================================
+
+(B) Create a JSON file and persist it in any database
+
+
+Ans :
+
+import json
+import pymongo
+
+# Create a JSON file
+data = {"name": "John Doe", "age": 30}
+with open("a.json", "w") as f:
+    json.dump(data, f)
+
+# Persist the JSON file in a database
+client = pymongo.MongoClient("localhost", 27017)
+db = client.test # db name 
+collection = db.json # collection name 
+ 
+# Create a document from the JSON file
+document = json.load(open("a.json"))
+collection.insert_one(document)
+print("Data inserted successfully")
+# Close the database connection
+client.close()
